@@ -6,7 +6,7 @@ from zeep import Settings
 from zeep.helpers import serialize_object
 from collections import OrderedDict
 
-def load_config(config_file='config.json'):
+def load_config(config_file='../config.json'):
     try:
         with open(config_file, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -84,7 +84,7 @@ def main():
         return
 
     print(f"\n總共取得 {len(attr_set_list)} 個屬性集合")
-    # 用來儲存所有屬性，利用屬性 code 去重複
+    # 用來儲存所有屬性，以屬性 code 為唯一鍵
     all_attributes = {}
     for attr_set in attr_set_list:
         set_id = attr_set.get("set_id")
@@ -109,20 +109,29 @@ def main():
     total_all = len(all_attributes)
     print(f"\n合併後共取得 {total_all} 筆不同屬性資料")
 
+    # 將屬性資料轉換成列表，並以 attribute_id 升冪排序
+    def sort_key(item):
+        # item 是 (code, attr) tuple，取 attr 裡的 attribute_id
+        attr = item[1]
+        try:
+            # 嘗試將 attribute_id 轉成整數進行排序
+            return int(attr.get("attribute_id", 0))
+        except:
+            return attr.get("attribute_id", 0)
+
+    sorted_attributes = sorted(all_attributes.items(), key=sort_key)
+
     # 顯示部分欄位
     headers = ["attribute_id", "code", "type", "required", "scope"]
-    print("\n完整屬性列表:")
+    print("\n完整屬性列表 (依 attribute_id 升冪排序):")
     print(f"{headers[0]:<15} {headers[1]:<25} {headers[2]:<15} {headers[3]:<10} {headers[4]:<10}")
-    for attr in all_attributes.values():
+    for code, attr in sorted_attributes:
         row0 = str(attr.get("attribute_id", ""))
         row1 = str(attr.get("code", ""))
         row2 = str(attr.get("type", ""))
         row3 = str(attr.get("required", ""))
         row4 = str(attr.get("scope", ""))
         print(f"{row0:<15} {row1:<25} {row2:<15} {row3:<10} {row4:<10}")
-
-    # 在此處，你還可以加入額外邏輯，針對那些未綁定任何屬性集合的屬性進行處理，
-    # 但這通常需要透過資料庫查詢 eav_attribute 表來補足。
 
     try:
         client.service.endSession(session)

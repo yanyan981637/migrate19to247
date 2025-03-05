@@ -1,0 +1,661 @@
+attribute_id,code,label,type,required,scope,options
+null,created_at,created_at,,,global,
+null,updated_at,updated_at,,,global,
+null,parent_id,parent_id,,,global,
+null,increment_id,increment_id,,,global,
+41,name,name,text,1,store,
+42,is_active,is_active,select,1,store,"Yes, No"
+43,url_key,url_key,text,0,store,
+44,description,description,textarea,0,store,
+45,image,image,image,0,store,
+46,meta_title,meta_title,text,0,store,
+47,meta_keywords,meta_keywords,textarea,0,store,
+48,meta_description,meta_description,textarea,0,store,
+49,display_mode,display_mode,select,0,store,"Products only, Static block only, Static block and products, Landing page"
+50,landing_page,landing_page,select,0,store,"Please select a static block ..., Footer Links, Footer Links Company, Cookie restriction notice, EN-DashCam, EN-Software, EN-GPS, nl_nl_contact, MiVue™ Manager_EN, MivueManager_img, MiVue™ Manager_NL, nl_be_Contacts, MiVue™ Manager_DE, Landing Page - All Store View, MiVue™ Manager_FR, DE_Website_ContactUs, fr_be_ContactUs, B2B_Contact_UK, B2B_Contact_US, B2B_Contact_AU, IWD Blog - Test Banner, IWD Blog - Connect With Us, B2B_Contact_NL, B2B Contacts-DE, B2B Contacts-FR, Partnerresource Title, Partnerresource Title Fr, Partnerresource Title De, Partnerresource Title nl, Mivue App_EN, Mivue App Image_EN, Mivue Pro App_EN, Mivue Pro App Image_EN, US contact-info, RMA Policy, MiVue Share, MiVue Share Image, MioShare™, MiVue Share Image, MioShare™ Dutch, MioShare™ FR, MioShare™ DE, Mivue Pro App_NL, Mivue Pro App_FR, Mivue Pro App_DE, Partner Portal Resources, Partner Portal Resources, Partner Portal Resources, Partner Portal Resources, Site Closed, Under Construction, MiDM, B2B-Homebannber-Title-english, B2B-Homebannber-Title-Netherlands, B2B-Homebannber-Title-Frence, B2B-Homebannber-Title-German, B2B-Miowork-Title-english, B2B-Mioeye-Title-english, B2B-Miocare-Title-english, B2B-Mioeye-Title-german, B2B-Mioeye-Title-dutch, B2B-Miowork-Title-german, B2B-Miowork-Title-dutch, B2B-Miowork-Title-french, B2B-Mioeye-Title-french, B2B-Miocare-Title-german, B2B-Miocare-Title-dutch, B2B-Miocare-Title-french, B2B-Mioserv-Title-english"
+51,is_anchor,is_anchor,select,0,global,"Yes, No"
+52,path,path,text,0,global,
+53,position,position,text,0,global,
+54,all_children,all_children,text,0,global,
+55,path_in_store,path_in_store,text,0,global,
+56,children,children,text,0,global,
+57,url_path,url_path,text,0,store,
+58,custom_design,custom_design,select,0,store,"base, default, rwd, astralweb"
+59,custom_design_from,custom_design_from,date,0,store,
+60,custom_design_to,custom_design_to,date,0,store,
+61,page_layout,page_layout,select,0,store,"No layout updates, Empty, 1 column, 2 columns with left bar, 2 columns with right bar, 3 columns"
+62,custom_layout_update,custom_layout_update,textarea,0,store,
+63,level,level,text,0,global,
+64,children_count,children_count,text,0,global,
+65,available_sort_by,available_sort_by,multiselect,1,store,"Best Value, Name, Price, New"
+66,default_sort_by,default_sort_by,select,1,store,"Best Value, Name, Price, New"
+67,include_in_menu,include_in_menu,select,1,store,"Yes, No"
+68,custom_use_parent_settings,custom_use_parent_settings,select,0,store,"Yes, No"
+69,custom_apply_to_products,custom_apply_to_products,select,0,store,"Yes, No"
+70,filter_price_range,filter_price_range,text,0,store,
+870,cate_section,cate_section,select,0,store,"Section 1, Section 2, Section 3, Section 4, Section 5, Section 6, Section 7, Section 8, Section 9, Section 10, Section 11, Section 12, Section 13, Section 14, Section 15"
+871,s1_template,s1_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+872,s2_template,s2_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+873,s3_template,s3_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+874,s4_template,s4_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+875,s5_template,s5_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+876,s6_template,s6_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+877,s7_template,s7_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+878,s8_template,s8_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+879,s9_template,s9_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+880,s10_template,s10_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+881,s11_template,s11_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+882,s12_template,s12_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+883,s13_template,s13_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+884,s14_template,s14_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+885,s15_template,s15_template,select,0,store,"4 blocks, Full Width Banner, Video only, Fixed Width Banner, 3-Column, 2-Column(2 rows right), 2-Column(2 rows left), Quad Block, Plan Text, Plan Text With Description"
+886,s1_title_1,s1_title_1,text,0,store,
+887,s1_title_2,s1_title_2,text,0,store,
+888,s1_title_3,s1_title_3,text,0,store,
+889,s1_title_4,s1_title_4,text,0,store,
+890,s2_title_1,s2_title_1,text,0,store,
+891,s2_title_2,s2_title_2,text,0,store,
+892,s2_title_3,s2_title_3,text,0,store,
+893,s2_title_4,s2_title_4,text,0,store,
+894,s3_title_1,s3_title_1,text,0,store,
+895,s3_title_2,s3_title_2,text,0,store,
+896,s3_title_3,s3_title_3,text,0,store,
+897,s3_title_4,s3_title_4,text,0,store,
+898,s4_title_1,s4_title_1,text,0,store,
+899,s4_title_2,s4_title_2,text,0,store,
+900,s4_title_3,s4_title_3,text,0,store,
+901,s4_title_4,s4_title_4,text,0,store,
+902,s5_title_1,s5_title_1,text,0,store,
+903,s5_title_2,s5_title_2,text,0,store,
+904,s5_title_3,s5_title_3,text,0,store,
+905,s5_title_4,s5_title_4,text,0,store,
+906,s6_title_1,s6_title_1,text,0,store,
+907,s6_title_2,s6_title_2,text,0,store,
+908,s6_title_3,s6_title_3,text,0,store,
+909,s6_title_4,s6_title_4,text,0,store,
+910,s7_title_1,s7_title_1,text,0,store,
+911,s7_title_2,s7_title_2,text,0,store,
+912,s7_title_3,s7_title_3,text,0,store,
+913,s7_title_4,s7_title_4,text,0,store,
+914,s8_title_1,s8_title_1,text,0,store,
+915,s8_title_2,s8_title_2,text,0,store,
+916,s8_title_3,s8_title_3,text,0,store,
+917,s8_title_4,s8_title_4,text,0,store,
+918,s9_title_1,s9_title_1,text,0,store,
+919,s9_title_2,s9_title_2,text,0,store,
+920,s9_title_3,s9_title_3,text,0,store,
+921,s9_title_4,s9_title_4,text,0,store,
+922,s10_title_1,s10_title_1,text,0,store,
+923,s10_title_2,s10_title_2,text,0,store,
+924,s10_title_3,s10_title_3,text,0,store,
+925,s10_title_4,s10_title_4,text,0,store,
+926,s11_title_1,s11_title_1,text,0,store,
+927,s11_title_2,s11_title_2,text,0,store,
+928,s11_title_3,s11_title_3,text,0,store,
+929,s11_title_4,s11_title_4,text,0,store,
+930,s12_title_1,s12_title_1,text,0,store,
+931,s12_title_2,s12_title_2,text,0,store,
+932,s12_title_3,s12_title_3,text,0,store,
+933,s12_title_4,s12_title_4,text,0,store,
+934,s13_title_1,s13_title_1,text,0,store,
+935,s13_title_2,s13_title_2,text,0,store,
+936,s13_title_3,s13_title_3,text,0,store,
+937,s13_title_4,s13_title_4,text,0,store,
+938,s14_title_1,s14_title_1,text,0,store,
+939,s14_title_2,s14_title_2,text,0,store,
+940,s14_title_3,s14_title_3,text,0,store,
+941,s14_title_4,s14_title_4,text,0,store,
+942,s15_title_1,s15_title_1,text,0,store,
+943,s15_title_2,s15_title_2,text,0,store,
+944,s15_title_3,s15_title_3,text,0,store,
+945,s15_title_4,s15_title_4,text,0,store,
+946,s1_description_1,s1_description_1,textarea,0,store,
+947,s1_description_2,s1_description_2,textarea,0,store,
+948,s1_description_3,s1_description_3,textarea,0,store,
+949,s1_description_4,s1_description_4,textarea,0,store,
+950,s2_description_1,s2_description_1,textarea,0,store,
+951,s2_description_2,s2_description_2,textarea,0,store,
+952,s2_description_3,s2_description_3,textarea,0,store,
+953,s2_description_4,s2_description_4,textarea,0,store,
+954,s3_description_1,s3_description_1,textarea,0,store,
+955,s3_description_2,s3_description_2,textarea,0,store,
+956,s3_description_3,s3_description_3,textarea,0,store,
+957,s3_description_4,s3_description_4,textarea,0,store,
+958,s4_description_1,s4_description_1,textarea,0,store,
+959,s4_description_2,s4_description_2,textarea,0,store,
+960,s4_description_3,s4_description_3,textarea,0,store,
+961,s4_description_4,s4_description_4,textarea,0,store,
+962,s5_description_1,s5_description_1,textarea,0,store,
+963,s5_description_2,s5_description_2,textarea,0,store,
+964,s5_description_3,s5_description_3,textarea,0,store,
+965,s5_description_4,s5_description_4,textarea,0,store,
+966,s6_description_1,s6_description_1,textarea,0,store,
+967,s6_description_2,s6_description_2,textarea,0,store,
+968,s6_description_3,s6_description_3,textarea,0,store,
+969,s6_description_4,s6_description_4,textarea,0,store,
+970,s7_description_1,s7_description_1,textarea,0,store,
+971,s7_description_2,s7_description_2,textarea,0,store,
+972,s7_description_3,s7_description_3,textarea,0,store,
+973,s7_description_4,s7_description_4,textarea,0,store,
+974,s8_description_1,s8_description_1,textarea,0,store,
+975,s8_description_2,s8_description_2,textarea,0,store,
+976,s8_description_3,s8_description_3,textarea,0,store,
+977,s8_description_4,s8_description_4,textarea,0,store,
+978,s9_description_1,s9_description_1,textarea,0,store,
+979,s9_description_2,s9_description_2,textarea,0,store,
+980,s9_description_3,s9_description_3,textarea,0,store,
+981,s9_description_4,s9_description_4,textarea,0,store,
+982,s10_description_1,s10_description_1,textarea,0,store,
+983,s10_description_2,s10_description_2,textarea,0,store,
+984,s10_description_3,s10_description_3,textarea,0,store,
+985,s10_description_4,s10_description_4,textarea,0,store,
+986,s11_description_1,s11_description_1,textarea,0,store,
+987,s11_description_2,s11_description_2,textarea,0,store,
+988,s11_description_3,s11_description_3,textarea,0,store,
+989,s11_description_4,s11_description_4,textarea,0,store,
+990,s12_description_1,s12_description_1,textarea,0,store,
+991,s12_description_2,s12_description_2,textarea,0,store,
+992,s12_description_3,s12_description_3,textarea,0,store,
+993,s12_description_4,s12_description_4,textarea,0,store,
+994,s13_description_1,s13_description_1,textarea,0,store,
+995,s13_description_2,s13_description_2,textarea,0,store,
+996,s13_description_3,s13_description_3,textarea,0,store,
+997,s13_description_4,s13_description_4,textarea,0,store,
+998,s14_description_1,s14_description_1,textarea,0,store,
+999,s14_description_2,s14_description_2,textarea,0,store,
+1000,s14_description_3,s14_description_3,textarea,0,store,
+1001,s14_description_4,s14_description_4,textarea,0,store,
+1002,s15_description_1,s15_description_1,textarea,0,store,
+1003,s15_description_2,s15_description_2,textarea,0,store,
+1004,s15_description_3,s15_description_3,textarea,0,store,
+1005,s15_description_4,s15_description_4,textarea,0,store,
+1006,s1_fontcolor_1,s1_fontcolor_1,select,0,store,"dark, light, grey, main"
+1007,s1_fontcolor_2,s1_fontcolor_2,select,0,store,"dark, light, grey, main"
+1008,s1_fontcolor_3,s1_fontcolor_3,select,0,store,"dark, light, grey, main"
+1009,s1_fontcolor_4,s1_fontcolor_4,select,0,store,"dark, light, grey, main"
+1010,s2_fontcolor_1,s2_fontcolor_1,select,0,store,"dark, light, grey, main"
+1011,s2_fontcolor_2,s2_fontcolor_2,select,0,store,"dark, light, grey, main"
+1012,s2_fontcolor_3,s2_fontcolor_3,select,0,store,"dark, light, grey, main"
+1013,s2_fontcolor_4,s2_fontcolor_4,select,0,store,"dark, light, grey, main"
+1014,s3_fontcolor_1,s3_fontcolor_1,select,0,store,"dark, light, grey, main"
+1015,s3_fontcolor_2,s3_fontcolor_2,select,0,store,"dark, light, grey, main"
+1016,s3_fontcolor_3,s3_fontcolor_3,select,0,store,"dark, light, grey, main"
+1017,s3_fontcolor_4,s3_fontcolor_4,select,0,store,"dark, light, grey, main"
+1018,s4_fontcolor_1,s4_fontcolor_1,select,0,store,"dark, light, grey, main"
+1019,s4_fontcolor_2,s4_fontcolor_2,select,0,store,"dark, light, grey, main"
+1020,s4_fontcolor_3,s4_fontcolor_3,select,0,store,"dark, light, grey, main"
+1021,s4_fontcolor_4,s4_fontcolor_4,select,0,store,"dark, light, grey, main"
+1022,s5_fontcolor_1,s5_fontcolor_1,select,0,store,"dark, light, grey, main"
+1023,s5_fontcolor_2,s5_fontcolor_2,select,0,store,"dark, light, grey, main"
+1024,s5_fontcolor_3,s5_fontcolor_3,select,0,store,"dark, light, grey, main"
+1025,s5_fontcolor_4,s5_fontcolor_4,select,0,store,"dark, light, grey, main"
+1026,s6_fontcolor_1,s6_fontcolor_1,select,0,store,"dark, light, grey, main"
+1027,s6_fontcolor_2,s6_fontcolor_2,select,0,store,"dark, light, grey, main"
+1028,s6_fontcolor_3,s6_fontcolor_3,select,0,store,"dark, light, grey, main"
+1029,s6_fontcolor_4,s6_fontcolor_4,select,0,store,"dark, light, grey, main"
+1030,s7_fontcolor_1,s7_fontcolor_1,select,0,store,"dark, light, grey, main"
+1031,s7_fontcolor_2,s7_fontcolor_2,select,0,store,"dark, light, grey, main"
+1032,s7_fontcolor_3,s7_fontcolor_3,select,0,store,"dark, light, grey, main"
+1033,s7_fontcolor_4,s7_fontcolor_4,select,0,store,"dark, light, grey, main"
+1034,s8_fontcolor_1,s8_fontcolor_1,select,0,store,"dark, light, grey, main"
+1035,s8_fontcolor_2,s8_fontcolor_2,select,0,store,"dark, light, grey, main"
+1036,s8_fontcolor_3,s8_fontcolor_3,select,0,store,"dark, light, grey, main"
+1037,s8_fontcolor_4,s8_fontcolor_4,select,0,store,"dark, light, grey, main"
+1038,s9_fontcolor_1,s9_fontcolor_1,select,0,store,"dark, light, grey, main"
+1039,s9_fontcolor_2,s9_fontcolor_2,select,0,store,"dark, light, grey, main"
+1040,s9_fontcolor_3,s9_fontcolor_3,select,0,store,"dark, light, grey, main"
+1041,s9_fontcolor_4,s9_fontcolor_4,select,0,store,"dark, light, grey, main"
+1042,s10_fontcolor_1,s10_fontcolor_1,select,0,store,"dark, light, grey, main"
+1043,s10_fontcolor_2,s10_fontcolor_2,select,0,store,"dark, light, grey, main"
+1044,s10_fontcolor_3,s10_fontcolor_3,select,0,store,"dark, light, grey, main"
+1045,s10_fontcolor_4,s10_fontcolor_4,select,0,store,"dark, light, grey, main"
+1046,s11_fontcolor_1,s11_fontcolor_1,select,0,store,"dark, light, grey, main"
+1047,s11_fontcolor_2,s11_fontcolor_2,select,0,store,"dark, light, grey, main"
+1048,s11_fontcolor_3,s11_fontcolor_3,select,0,store,"dark, light, grey, main"
+1049,s11_fontcolor_4,s11_fontcolor_4,select,0,store,"dark, light, grey, main"
+1050,s12_fontcolor_1,s12_fontcolor_1,select,0,store,"dark, light, grey, main"
+1051,s12_fontcolor_2,s12_fontcolor_2,select,0,store,"dark, light, grey, main"
+1052,s12_fontcolor_3,s12_fontcolor_3,select,0,store,"dark, light, grey, main"
+1053,s12_fontcolor_4,s12_fontcolor_4,select,0,store,"dark, light, grey, main"
+1054,s13_fontcolor_1,s13_fontcolor_1,select,0,store,"dark, light, grey, main"
+1055,s13_fontcolor_2,s13_fontcolor_2,select,0,store,"dark, light, grey, main"
+1056,s13_fontcolor_3,s13_fontcolor_3,select,0,store,"dark, light, grey, main"
+1057,s13_fontcolor_4,s13_fontcolor_4,select,0,store,"dark, light, grey, main"
+1058,s14_fontcolor_1,s14_fontcolor_1,select,0,store,"dark, light, grey, main"
+1059,s14_fontcolor_2,s14_fontcolor_2,select,0,store,"dark, light, grey, main"
+1060,s14_fontcolor_3,s14_fontcolor_3,select,0,store,"dark, light, grey, main"
+1061,s14_fontcolor_4,s14_fontcolor_4,select,0,store,"dark, light, grey, main"
+1062,s15_fontcolor_1,s15_fontcolor_1,select,0,store,"dark, light, grey, main"
+1063,s15_fontcolor_2,s15_fontcolor_2,select,0,store,"dark, light, grey, main"
+1064,s15_fontcolor_3,s15_fontcolor_3,select,0,store,"dark, light, grey, main"
+1065,s15_fontcolor_4,s15_fontcolor_4,select,0,store,"dark, light, grey, main"
+1066,s1_url_1,s1_url_1,text,0,store,
+1067,s1_url_2,s1_url_2,text,0,store,
+1068,s1_url_3,s1_url_3,text,0,store,
+1069,s1_url_4,s1_url_4,text,0,store,
+1070,s2_url_1,s2_url_1,text,0,store,
+1071,s2_url_2,s2_url_2,text,0,store,
+1072,s2_url_3,s2_url_3,text,0,store,
+1073,s2_url_4,s2_url_4,text,0,store,
+1074,s3_url_1,s3_url_1,text,0,store,
+1075,s3_url_2,s3_url_2,text,0,store,
+1076,s3_url_3,s3_url_3,text,0,store,
+1077,s3_url_4,s3_url_4,text,0,store,
+1078,s4_url_1,s4_url_1,text,0,store,
+1079,s4_url_2,s4_url_2,text,0,store,
+1080,s4_url_3,s4_url_3,text,0,store,
+1081,s4_url_4,s4_url_4,text,0,store,
+1082,s5_url_1,s5_url_1,text,0,store,
+1083,s5_url_2,s5_url_2,text,0,store,
+1084,s5_url_3,s5_url_3,text,0,store,
+1085,s5_url_4,s5_url_4,text,0,store,
+1086,s6_url_1,s6_url_1,text,0,store,
+1087,s6_url_2,s6_url_2,text,0,store,
+1088,s6_url_3,s6_url_3,text,0,store,
+1089,s6_url_4,s6_url_4,text,0,store,
+1090,s7_url_1,s7_url_1,text,0,store,
+1091,s7_url_2,s7_url_2,text,0,store,
+1092,s7_url_3,s7_url_3,text,0,store,
+1093,s7_url_4,s7_url_4,text,0,store,
+1094,s8_url_1,s8_url_1,text,0,store,
+1095,s8_url_2,s8_url_2,text,0,store,
+1096,s8_url_3,s8_url_3,text,0,store,
+1097,s8_url_4,s8_url_4,text,0,store,
+1098,s9_url_1,s9_url_1,text,0,store,
+1099,s9_url_2,s9_url_2,text,0,store,
+1100,s9_url_3,s9_url_3,text,0,store,
+1101,s9_url_4,s9_url_4,text,0,store,
+1102,s10_url_1,s10_url_1,text,0,store,
+1103,s10_url_2,s10_url_2,text,0,store,
+1104,s10_url_3,s10_url_3,text,0,store,
+1105,s10_url_4,s10_url_4,text,0,store,
+1106,s11_url_1,s11_url_1,text,0,store,
+1107,s11_url_2,s11_url_2,text,0,store,
+1108,s11_url_3,s11_url_3,text,0,store,
+1109,s11_url_4,s11_url_4,text,0,store,
+1110,s12_url_1,s12_url_1,text,0,store,
+1111,s12_url_2,s12_url_2,text,0,store,
+1112,s12_url_3,s12_url_3,text,0,store,
+1113,s12_url_4,s12_url_4,text,0,store,
+1114,s13_url_1,s13_url_1,text,0,store,
+1115,s13_url_2,s13_url_2,text,0,store,
+1116,s13_url_3,s13_url_3,text,0,store,
+1117,s13_url_4,s13_url_4,text,0,store,
+1118,s14_url_1,s14_url_1,text,0,store,
+1119,s14_url_2,s14_url_2,text,0,store,
+1120,s14_url_3,s14_url_3,text,0,store,
+1121,s14_url_4,s14_url_4,text,0,store,
+1122,s15_url_1,s15_url_1,text,0,store,
+1123,s15_url_2,s15_url_2,text,0,store,
+1124,s15_url_3,s15_url_3,text,0,store,
+1125,s15_url_4,s15_url_4,text,0,store,
+1126,s1_buttontext_1,s1_buttontext_1,text,0,store,
+1127,s1_buttontext_2,s1_buttontext_2,text,0,store,
+1128,s1_buttontext_3,s1_buttontext_3,text,0,store,
+1129,s1_buttontext_4,s1_buttontext_4,text,0,store,
+1130,s2_buttontext_1,s2_buttontext_1,text,0,store,
+1131,s2_buttontext_2,s2_buttontext_2,text,0,store,
+1132,s2_buttontext_3,s2_buttontext_3,text,0,store,
+1133,s2_buttontext_4,s2_buttontext_4,text,0,store,
+1134,s3_buttontext_1,s3_buttontext_1,text,0,store,
+1135,s3_buttontext_2,s3_buttontext_2,text,0,store,
+1136,s3_buttontext_3,s3_buttontext_3,text,0,store,
+1137,s3_buttontext_4,s3_buttontext_4,text,0,store,
+1138,s4_buttontext_1,s4_buttontext_1,text,0,store,
+1139,s4_buttontext_2,s4_buttontext_2,text,0,store,
+1140,s4_buttontext_3,s4_buttontext_3,text,0,store,
+1141,s4_buttontext_4,s4_buttontext_4,text,0,store,
+1142,s5_buttontext_1,s5_buttontext_1,text,0,store,
+1143,s5_buttontext_2,s5_buttontext_2,text,0,store,
+1144,s5_buttontext_3,s5_buttontext_3,text,0,store,
+1145,s5_buttontext_4,s5_buttontext_4,text,0,store,
+1146,s6_buttontext_1,s6_buttontext_1,text,0,store,
+1147,s6_buttontext_2,s6_buttontext_2,text,0,store,
+1148,s6_buttontext_3,s6_buttontext_3,text,0,store,
+1149,s6_buttontext_4,s6_buttontext_4,text,0,store,
+1150,s7_buttontext_1,s7_buttontext_1,text,0,store,
+1151,s7_buttontext_2,s7_buttontext_2,text,0,store,
+1152,s7_buttontext_3,s7_buttontext_3,text,0,store,
+1153,s7_buttontext_4,s7_buttontext_4,text,0,store,
+1154,s8_buttontext_1,s8_buttontext_1,text,0,store,
+1155,s8_buttontext_2,s8_buttontext_2,text,0,store,
+1156,s8_buttontext_3,s8_buttontext_3,text,0,store,
+1157,s8_buttontext_4,s8_buttontext_4,text,0,store,
+1158,s9_buttontext_1,s9_buttontext_1,text,0,store,
+1159,s9_buttontext_2,s9_buttontext_2,text,0,store,
+1160,s9_buttontext_3,s9_buttontext_3,text,0,store,
+1161,s9_buttontext_4,s9_buttontext_4,text,0,store,
+1162,s10_buttontext_1,s10_buttontext_1,text,0,store,
+1163,s10_buttontext_2,s10_buttontext_2,text,0,store,
+1164,s10_buttontext_3,s10_buttontext_3,text,0,store,
+1165,s10_buttontext_4,s10_buttontext_4,text,0,store,
+1166,s11_buttontext_1,s11_buttontext_1,text,0,store,
+1167,s11_buttontext_2,s11_buttontext_2,text,0,store,
+1168,s11_buttontext_3,s11_buttontext_3,text,0,store,
+1169,s11_buttontext_4,s11_buttontext_4,text,0,store,
+1170,s12_buttontext_1,s12_buttontext_1,text,0,store,
+1171,s12_buttontext_2,s12_buttontext_2,text,0,store,
+1172,s12_buttontext_3,s12_buttontext_3,text,0,store,
+1173,s12_buttontext_4,s12_buttontext_4,text,0,store,
+1174,s13_buttontext_1,s13_buttontext_1,text,0,store,
+1175,s13_buttontext_2,s13_buttontext_2,text,0,store,
+1176,s13_buttontext_3,s13_buttontext_3,text,0,store,
+1177,s13_buttontext_4,s13_buttontext_4,text,0,store,
+1178,s14_buttontext_1,s14_buttontext_1,text,0,store,
+1179,s14_buttontext_2,s14_buttontext_2,text,0,store,
+1180,s14_buttontext_3,s14_buttontext_3,text,0,store,
+1181,s14_buttontext_4,s14_buttontext_4,text,0,store,
+1182,s15_buttontext_1,s15_buttontext_1,text,0,store,
+1183,s15_buttontext_2,s15_buttontext_2,text,0,store,
+1184,s15_buttontext_3,s15_buttontext_3,text,0,store,
+1185,s15_buttontext_4,s15_buttontext_4,text,0,store,
+1186,s1_image_1,s1_image_1,image,0,store,
+1187,s1_image_2,s1_image_2,image,0,store,
+1188,s1_image_3,s1_image_3,image,0,store,
+1189,s1_image_4,s1_image_4,image,0,store,
+1190,s2_image_1,s2_image_1,image,0,store,
+1191,s2_image_2,s2_image_2,image,0,store,
+1192,s2_image_3,s2_image_3,image,0,store,
+1193,s2_image_4,s2_image_4,image,0,store,
+1194,s3_image_1,s3_image_1,image,0,store,
+1195,s3_image_2,s3_image_2,image,0,store,
+1196,s3_image_3,s3_image_3,image,0,store,
+1197,s3_image_4,s3_image_4,image,0,store,
+1198,s4_image_1,s4_image_1,image,0,store,
+1199,s4_image_2,s4_image_2,image,0,store,
+1200,s4_image_3,s4_image_3,image,0,store,
+1201,s4_image_4,s4_image_4,image,0,store,
+1202,s5_image_1,s5_image_1,image,0,store,
+1203,s5_image_2,s5_image_2,image,0,store,
+1204,s5_image_3,s5_image_3,image,0,store,
+1205,s5_image_4,s5_image_4,image,0,store,
+1206,s6_image_1,s6_image_1,image,0,store,
+1207,s6_image_2,s6_image_2,image,0,store,
+1208,s6_image_3,s6_image_3,image,0,store,
+1209,s6_image_4,s6_image_4,image,0,store,
+1210,s7_image_1,s7_image_1,image,0,store,
+1211,s7_image_2,s7_image_2,image,0,store,
+1212,s7_image_3,s7_image_3,image,0,store,
+1213,s7_image_4,s7_image_4,image,0,store,
+1214,s8_image_1,s8_image_1,image,0,store,
+1215,s8_image_2,s8_image_2,image,0,store,
+1216,s8_image_3,s8_image_3,image,0,store,
+1217,s8_image_4,s8_image_4,image,0,store,
+1218,s9_image_1,s9_image_1,image,0,store,
+1219,s9_image_2,s9_image_2,image,0,store,
+1220,s9_image_3,s9_image_3,image,0,store,
+1221,s9_image_4,s9_image_4,image,0,store,
+1222,s10_image_1,s10_image_1,image,0,store,
+1223,s10_image_2,s10_image_2,image,0,store,
+1224,s10_image_3,s10_image_3,image,0,store,
+1225,s10_image_4,s10_image_4,image,0,store,
+1226,s11_image_1,s11_image_1,image,0,store,
+1227,s11_image_2,s11_image_2,image,0,store,
+1228,s11_image_3,s11_image_3,image,0,store,
+1229,s11_image_4,s11_image_4,image,0,store,
+1230,s12_image_1,s12_image_1,image,0,store,
+1231,s12_image_2,s12_image_2,image,0,store,
+1232,s12_image_3,s12_image_3,image,0,store,
+1233,s12_image_4,s12_image_4,image,0,store,
+1234,s13_image_1,s13_image_1,image,0,store,
+1235,s13_image_2,s13_image_2,image,0,store,
+1236,s13_image_3,s13_image_3,image,0,store,
+1237,s13_image_4,s13_image_4,image,0,store,
+1238,s14_image_1,s14_image_1,image,0,store,
+1239,s14_image_2,s14_image_2,image,0,store,
+1240,s14_image_3,s14_image_3,image,0,store,
+1241,s14_image_4,s14_image_4,image,0,store,
+1242,s15_image_1,s15_image_1,image,0,store,
+1243,s15_image_2,s15_image_2,image,0,store,
+1244,s15_image_3,s15_image_3,image,0,store,
+1245,s15_image_4,s15_image_4,image,0,store,
+1256,searchindex_weight,searchindex_weight,text,0,store,
+1258,s1_title,s1_title,text,0,store,
+1259,s2_title,s2_title,text,0,store,
+1260,s3_title,s3_title,text,0,store,
+1261,s4_title,s4_title,text,0,store,
+1262,s5_title,s5_title,text,0,store,
+1263,s6_title,s6_title,text,0,store,
+1264,s7_title,s7_title,text,0,store,
+1265,s8_title,s8_title,text,0,store,
+1266,s9_title,s9_title,text,0,store,
+1267,s10_title,s10_title,text,0,store,
+1268,s11_title,s11_title,text,0,store,
+1269,s12_title,s12_title,text,0,store,
+1270,s13_title,s13_title,text,0,store,
+1271,s14_title,s14_title,text,0,store,
+1272,s15_title,s15_title,text,0,store,
+1278,s1_btn_link_target_1,s1_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1279,s1_btn_link_target_2,s1_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1280,s1_btn_link_target_3,s1_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1281,s1_btn_link_target_4,s1_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1282,s2_btn_link_target_1,s2_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1283,s2_btn_link_target_2,s2_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1284,s2_btn_link_target_3,s2_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1285,s2_btn_link_target_4,s2_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1286,s3_btn_link_target_1,s3_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1287,s3_btn_link_target_2,s3_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1288,s3_btn_link_target_3,s3_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1289,s3_btn_link_target_4,s3_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1290,s4_btn_link_target_1,s4_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1291,s4_btn_link_target_2,s4_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1292,s4_btn_link_target_3,s4_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1293,s4_btn_link_target_4,s4_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1294,s5_btn_link_target_1,s5_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1295,s5_btn_link_target_2,s5_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1296,s5_btn_link_target_3,s5_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1297,s5_btn_link_target_4,s5_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1298,s6_btn_link_target_1,s6_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1299,s6_btn_link_target_2,s6_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1300,s6_btn_link_target_3,s6_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1301,s6_btn_link_target_4,s6_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1302,s7_btn_link_target_1,s7_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1303,s7_btn_link_target_2,s7_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1304,s7_btn_link_target_3,s7_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1305,s7_btn_link_target_4,s7_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1306,s8_btn_link_target_1,s8_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1307,s8_btn_link_target_2,s8_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1308,s8_btn_link_target_3,s8_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1309,s8_btn_link_target_4,s8_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1310,s9_btn_link_target_1,s9_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1311,s9_btn_link_target_2,s9_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1312,s9_btn_link_target_3,s9_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1313,s9_btn_link_target_4,s9_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1314,s10_btn_link_target_1,s10_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1315,s10_btn_link_target_2,s10_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1316,s10_btn_link_target_3,s10_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1317,s10_btn_link_target_4,s10_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1318,s11_btn_link_target_1,s11_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1319,s11_btn_link_target_2,s11_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1320,s11_btn_link_target_3,s11_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1321,s11_btn_link_target_4,s11_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1322,s12_btn_link_target_1,s12_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1323,s12_btn_link_target_2,s12_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1324,s12_btn_link_target_3,s12_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1325,s12_btn_link_target_4,s12_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1326,s13_btn_link_target_1,s13_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1327,s13_btn_link_target_2,s13_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1328,s13_btn_link_target_3,s13_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1329,s13_btn_link_target_4,s13_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1330,s14_btn_link_target_1,s14_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1331,s14_btn_link_target_2,s14_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1332,s14_btn_link_target_3,s14_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1333,s14_btn_link_target_4,s14_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1334,s15_btn_link_target_1,s15_btn_link_target_1,select,0,store,"_blank, _self, _parent, _top"
+1335,s15_btn_link_target_2,s15_btn_link_target_2,select,0,store,"_blank, _self, _parent, _top"
+1336,s15_btn_link_target_3,s15_btn_link_target_3,select,0,store,"_blank, _self, _parent, _top"
+1337,s15_btn_link_target_4,s15_btn_link_target_4,select,0,store,"_blank, _self, _parent, _top"
+1338,s1_btn_color_1,s1_btn_color_1,select,0,store,"dark, light, grey, main"
+1339,s1_btn_color_2,s1_btn_color_2,select,0,store,"dark, light, grey, main"
+1340,s1_btn_color_3,s1_btn_color_3,select,0,store,"dark, light, grey, main"
+1341,s1_btn_color_4,s1_btn_color_4,select,0,store,"dark, light, grey, main"
+1342,s2_btn_color_1,s2_btn_color_1,select,0,store,"dark, light, grey, main"
+1343,s2_btn_color_2,s2_btn_color_2,select,0,store,"dark, light, grey, main"
+1344,s2_btn_color_3,s2_btn_color_3,select,0,store,"dark, light, grey, main"
+1345,s2_btn_color_4,s2_btn_color_4,select,0,store,"dark, light, grey, main"
+1346,s3_btn_color_1,s3_btn_color_1,select,0,store,"dark, light, grey, main"
+1347,s3_btn_color_2,s3_btn_color_2,select,0,store,"dark, light, grey, main"
+1348,s3_btn_color_3,s3_btn_color_3,select,0,store,"dark, light, grey, main"
+1349,s3_btn_color_4,s3_btn_color_4,select,0,store,"dark, light, grey, main"
+1350,s4_btn_color_1,s4_btn_color_1,select,0,store,"dark, light, grey, main"
+1351,s4_btn_color_2,s4_btn_color_2,select,0,store,"dark, light, grey, main"
+1352,s4_btn_color_3,s4_btn_color_3,select,0,store,"dark, light, grey, main"
+1353,s4_btn_color_4,s4_btn_color_4,select,0,store,"dark, light, grey, main"
+1354,s5_btn_color_1,s5_btn_color_1,select,0,store,"dark, light, grey, main"
+1355,s5_btn_color_2,s5_btn_color_2,select,0,store,"dark, light, grey, main"
+1356,s5_btn_color_3,s5_btn_color_3,select,0,store,"dark, light, grey, main"
+1357,s5_btn_color_4,s5_btn_color_4,select,0,store,"dark, light, grey, main"
+1358,s6_btn_color_1,s6_btn_color_1,select,0,store,"dark, light, grey, main"
+1359,s6_btn_color_2,s6_btn_color_2,select,0,store,"dark, light, grey, main"
+1360,s6_btn_color_3,s6_btn_color_3,select,0,store,"dark, light, grey, main"
+1361,s6_btn_color_4,s6_btn_color_4,select,0,store,"dark, light, grey, main"
+1362,s7_btn_color_1,s7_btn_color_1,select,0,store,"dark, light, grey, main"
+1363,s7_btn_color_2,s7_btn_color_2,select,0,store,"dark, light, grey, main"
+1364,s7_btn_color_3,s7_btn_color_3,select,0,store,"dark, light, grey, main"
+1365,s7_btn_color_4,s7_btn_color_4,select,0,store,"dark, light, grey, main"
+1366,s8_btn_color_1,s8_btn_color_1,select,0,store,"dark, light, grey, main"
+1367,s8_btn_color_2,s8_btn_color_2,select,0,store,"dark, light, grey, main"
+1368,s8_btn_color_3,s8_btn_color_3,select,0,store,"dark, light, grey, main"
+1369,s8_btn_color_4,s8_btn_color_4,select,0,store,"dark, light, grey, main"
+1370,s9_btn_color_1,s9_btn_color_1,select,0,store,"dark, light, grey, main"
+1371,s9_btn_color_2,s9_btn_color_2,select,0,store,"dark, light, grey, main"
+1372,s9_btn_color_3,s9_btn_color_3,select,0,store,"dark, light, grey, main"
+1373,s9_btn_color_4,s9_btn_color_4,select,0,store,"dark, light, grey, main"
+1374,s10_btn_color_1,s10_btn_color_1,select,0,store,"dark, light, grey, main"
+1375,s10_btn_color_2,s10_btn_color_2,select,0,store,"dark, light, grey, main"
+1376,s10_btn_color_3,s10_btn_color_3,select,0,store,"dark, light, grey, main"
+1377,s10_btn_color_4,s10_btn_color_4,select,0,store,"dark, light, grey, main"
+1378,s11_btn_color_1,s11_btn_color_1,select,0,store,"dark, light, grey, main"
+1379,s11_btn_color_2,s11_btn_color_2,select,0,store,"dark, light, grey, main"
+1380,s11_btn_color_3,s11_btn_color_3,select,0,store,"dark, light, grey, main"
+1381,s11_btn_color_4,s11_btn_color_4,select,0,store,"dark, light, grey, main"
+1382,s12_btn_color_1,s12_btn_color_1,select,0,store,"dark, light, grey, main"
+1383,s12_btn_color_2,s12_btn_color_2,select,0,store,"dark, light, grey, main"
+1384,s12_btn_color_3,s12_btn_color_3,select,0,store,"dark, light, grey, main"
+1385,s12_btn_color_4,s12_btn_color_4,select,0,store,"dark, light, grey, main"
+1386,s13_btn_color_1,s13_btn_color_1,select,0,store,"dark, light, grey, main"
+1387,s13_btn_color_2,s13_btn_color_2,select,0,store,"dark, light, grey, main"
+1388,s13_btn_color_3,s13_btn_color_3,select,0,store,"dark, light, grey, main"
+1389,s13_btn_color_4,s13_btn_color_4,select,0,store,"dark, light, grey, main"
+1390,s14_btn_color_1,s14_btn_color_1,select,0,store,"dark, light, grey, main"
+1391,s14_btn_color_2,s14_btn_color_2,select,0,store,"dark, light, grey, main"
+1392,s14_btn_color_3,s14_btn_color_3,select,0,store,"dark, light, grey, main"
+1393,s14_btn_color_4,s14_btn_color_4,select,0,store,"dark, light, grey, main"
+1394,s15_btn_color_1,s15_btn_color_1,select,0,store,"dark, light, grey, main"
+1395,s15_btn_color_2,s15_btn_color_2,select,0,store,"dark, light, grey, main"
+1396,s15_btn_color_3,s15_btn_color_3,select,0,store,"dark, light, grey, main"
+1397,s15_btn_color_4,s15_btn_color_4,select,0,store,"dark, light, grey, main"
+1438,mega_navi,mega_navi,select,0,store,"Enable, Disable"
+1439,s1_video_url,s1_video_url,text,0,store,
+1440,s2_video_url,s2_video_url,text,0,store,
+1441,s3_video_url,s3_video_url,text,0,store,
+1442,s4_video_url,s4_video_url,text,0,store,
+1443,s5_video_url,s5_video_url,text,0,store,
+1444,s6_video_url,s6_video_url,text,0,store,
+1445,s7_video_url,s7_video_url,text,0,store,
+1446,s8_video_url,s8_video_url,text,0,store,
+1447,s9_video_url,s9_video_url,text,0,store,
+1448,s10_video_url,s10_video_url,text,0,store,
+1449,s11_video_url,s11_video_url,text,0,store,
+1450,s12_video_url,s12_video_url,text,0,store,
+1451,s13_video_url,s13_video_url,text,0,store,
+1452,s14_video_url,s14_video_url,text,0,store,
+1453,s15_video_url,s15_video_url,text,0,store,
+1454,s1_autoplay,s1_autoplay,select,0,store,"Yes, No"
+1455,s2_autoplay,s2_autoplay,select,0,store,"Yes, No"
+1456,s3_autoplay,s3_autoplay,select,0,store,"Yes, No"
+1457,s4_autoplay,s4_autoplay,select,0,store,"Yes, No"
+1458,s5_autoplay,s5_autoplay,select,0,store,"Yes, No"
+1459,s6_autoplay,s6_autoplay,select,0,store,"Yes, No"
+1460,s7_autoplay,s7_autoplay,select,0,store,"Yes, No"
+1461,s8_autoplay,s8_autoplay,select,0,store,"Yes, No"
+1462,s9_autoplay,s9_autoplay,select,0,store,"Yes, No"
+1463,s10_autoplay,s10_autoplay,select,0,store,"Yes, No"
+1464,s11_autoplay,s11_autoplay,select,0,store,"Yes, No"
+1465,s12_autoplay,s12_autoplay,select,0,store,"Yes, No"
+1466,s13_autoplay,s13_autoplay,select,0,store,"Yes, No"
+1467,s14_autoplay,s14_autoplay,select,0,store,"Yes, No"
+1468,s15_autoplay,s15_autoplay,select,0,store,"Yes, No"
+1469,s1_mute,s1_mute,select,0,store,"Yes, No"
+1470,s2_mute,s2_mute,select,0,store,"Yes, No"
+1471,s3_mute,s3_mute,select,0,store,"Yes, No"
+1472,s4_mute,s4_mute,select,0,store,"Yes, No"
+1473,s5_mute,s5_mute,select,0,store,"Yes, No"
+1474,s6_mute,s6_mute,select,0,store,"Yes, No"
+1475,s7_mute,s7_mute,select,0,store,"Yes, No"
+1476,s8_mute,s8_mute,select,0,store,"Yes, No"
+1477,s9_mute,s9_mute,select,0,store,"Yes, No"
+1478,s10_mute,s10_mute,select,0,store,"Yes, No"
+1479,s11_mute,s11_mute,select,0,store,"Yes, No"
+1480,s12_mute,s12_mute,select,0,store,"Yes, No"
+1481,s13_mute,s13_mute,select,0,store,"Yes, No"
+1482,s14_mute,s14_mute,select,0,store,"Yes, No"
+1483,s15_mute,s15_mute,select,0,store,"Yes, No"
+1484,s1_autoreplay,s1_autoreplay,select,0,store,"Yes, No"
+1485,s2_autoreplay,s2_autoreplay,select,0,store,"Yes, No"
+1486,s3_autoreplay,s3_autoreplay,select,0,store,"Yes, No"
+1487,s4_autoreplay,s4_autoreplay,select,0,store,"Yes, No"
+1488,s5_autoreplay,s5_autoreplay,select,0,store,"Yes, No"
+1489,s6_autoreplay,s6_autoreplay,select,0,store,"Yes, No"
+1490,s7_autoreplay,s7_autoreplay,select,0,store,"Yes, No"
+1491,s8_autoreplay,s8_autoreplay,select,0,store,"Yes, No"
+1492,s9_autoreplay,s9_autoreplay,select,0,store,"Yes, No"
+1493,s10_autoreplay,s10_autoreplay,select,0,store,"Yes, No"
+1494,s11_autoreplay,s11_autoreplay,select,0,store,"Yes, No"
+1495,s12_autoreplay,s12_autoreplay,select,0,store,"Yes, No"
+1496,s13_autoreplay,s13_autoreplay,select,0,store,"Yes, No"
+1497,s14_autoreplay,s14_autoreplay,select,0,store,"Yes, No"
+1498,s15_autoreplay,s15_autoreplay,select,0,store,"Yes, No"
+1499,s1_enable,s1_enable,select,0,store,"Yes, No"
+1500,s2_enable,s2_enable,select,0,store,"Yes, No"
+1501,s3_enable,s3_enable,select,0,store,"Yes, No"
+1502,s4_enable,s4_enable,select,0,store,"Yes, No"
+1503,s5_enable,s5_enable,select,0,store,"Yes, No"
+1504,s6_enable,s6_enable,select,0,store,"Yes, No"
+1505,s7_enable,s7_enable,select,0,store,"Yes, No"
+1506,s8_enable,s8_enable,select,0,store,"Yes, No"
+1507,s9_enable,s9_enable,select,0,store,"Yes, No"
+1508,s10_enable,s10_enable,select,0,store,"Yes, No"
+1509,s11_enable,s11_enable,select,0,store,"Yes, No"
+1510,s12_enable,s12_enable,select,0,store,"Yes, No"
+1511,s13_enable,s13_enable,select,0,store,"Yes, No"
+1512,s14_enable,s14_enable,select,0,store,"Yes, No"
+1513,s15_enable,s15_enable,select,0,store,"Yes, No"
+1525,landing_title,landing_title,text,0,store,
+1526,landing_description,landing_description,textarea,0,store,
+1584,s1_position,s1_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1585,s2_position,s2_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1586,s3_position,s3_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1587,s4_position,s4_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1588,s5_position,s5_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1589,s6_position,s6_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1590,s7_position,s7_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1591,s8_position,s8_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1592,s9_position,s9_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1593,s10_position,s10_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1594,s11_position,s11_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1595,s12_position,s12_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1596,s13_position,s13_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1597,s14_position,s14_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1598,s15_position,s15_position,select,0,store,"Text right, image left, Text left, image right, Middle (image up, text down)"
+1599,s1_image_front,s1_image_front,image,0,store,
+1600,s2_image_front,s2_image_front,image,0,store,
+1601,s3_image_front,s3_image_front,image,0,store,
+1602,s4_image_front,s4_image_front,image,0,store,
+1603,s5_image_front,s5_image_front,image,0,store,
+1604,s6_image_front,s6_image_front,image,0,store,
+1605,s7_image_front,s7_image_front,image,0,store,
+1606,s8_image_front,s8_image_front,image,0,store,
+1607,s9_image_front,s9_image_front,image,0,store,
+1608,s10_image_front,s10_image_front,image,0,store,
+1609,s11_image_front,s11_image_front,image,0,store,
+1610,s12_image_front,s12_image_front,image,0,store,
+1611,s13_image_front,s13_image_front,image,0,store,
+1612,s14_image_front,s14_image_front,image,0,store,
+1613,s15_image_front,s15_image_front,image,0,store,
+1769,policy_name1,policy_name1,text,0,store,
+1770,policy_content1,policy_content1,textarea,0,store,
+1771,policy_name2,policy_name2,text,0,store,
+1772,policy_content2,policy_content2,textarea,0,store,
+1773,policy_name3,policy_name3,text,0,store,
+1774,policy_content3,policy_content3,textarea,0,store,
