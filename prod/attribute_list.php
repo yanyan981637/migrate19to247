@@ -145,6 +145,12 @@ foreach ($attributeSetIds as $setId) {
             }
             // 合併：以 API 資料覆蓋資料庫中相同 key
             $merged = array_merge($attr, $apiInfo);
+            // 檢查 additional_fields 中是否包含 is_html_allowed_on_front，若有則提取到外層
+            if (isset($merged['additional_fields']) && is_array($merged['additional_fields']) && isset($merged['additional_fields']['is_html_allowed_on_front'])) {
+                $merged['is_html_allowed_on_front'] = $merged['additional_fields']['is_html_allowed_on_front'];
+                // 可選：將該項目從 additional_fields 移除
+                unset($merged['additional_fields']['is_html_allowed_on_front']);
+            }
             // 紀錄所屬 attribute set 與 group
             $merged['attribute_set_id'] = $setId;
             $merged['attribute_group_id'] = $groupId;
@@ -189,7 +195,7 @@ foreach ($attributeSetIds as $setId) {
                         <p style="text-align:center;">此群組無任何 Attribute</p>
                     <?php else: ?>
                         <?php foreach ($groupData['attributes'] as $attribute): 
-                            // 動態取得所有欄位 key
+                            // 動態取得所有欄位 key (每個 attribute 的欄位)
                             $allKeys = array_keys($attribute);
                             sort($allKeys);
                         ?>
