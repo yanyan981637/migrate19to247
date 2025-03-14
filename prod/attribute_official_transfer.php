@@ -15,15 +15,13 @@
  * 4. 建立 Magento2 attribute (POST /products/attributes)；若建立失敗（錯誤訊息包含 "already exists" 或 "reserved by system"）則以 GET 搜尋取得 attribute，
  *    如果搜尋結果中 is_visible 為 false，則以 GET 回傳的完整 attribute 物件修改 is_visible 為 true（並更新 default_frontend_label），然後以 PUT 更新該屬性。
  * 5. 指派 attribute 至 group (POST /products/attribute-sets/attributes)。
+ * 6. 最後，對每個 group 下的 attribute 依 attribute_code 升冪排序，依序更新 sortOrder（從 1 開始）。
  *
  * 注意：
  *   - frontend_input 直接採用 Magento1 讀取到的 frontend_input，若無值則預設為 "text"（若 attribute code 為 "weight" 也強制設定為 "text"）。
  *   - frontend_labels：從 Magento1 的 eav_attribute 表讀取 frontend_label 欄位，
- *     若有值則轉換成格式 
- *       [ ["store_id" => 0, "label" => <讀取到的值>] ]
- *     若無則傳入空陣列。
- *   - 若 default_frontend_label 為空，則以 attribute_code 的值作為 default_frontend_label，
- *     並將底線轉成空白，且每個單字的首字母大寫。
+ *     若有值則轉換成格式 [ ["store_id" => 0, "label" => <讀取到的值>] ]，若無則傳入空陣列。
+ *   - 若 default_frontend_label 為空，則以 attribute_code 經格式化（底線轉成空白、每個單字首字母大寫）作為預設值。
  *   - options 資料將移除 option_id，並新增 label 欄位，值與 value 相同。
  *
  * 為避免執行時間過長，使用 set_time_limit(0)。
@@ -216,8 +214,8 @@ foreach ($attributeSetIds as $setId) {
             $attrId = $attr['attribute_id'];
             try {
                 $apiInfo = $client->call($session, 'product_attribute.info', $attrId);
-                if (!is_array($apiInfo)) {
-                    $apiInfo = [];
+                if (!is_array($apiInfo)) { 
+                    $apiInfo = []; 
                 }
             } catch (Exception $e) {
                 $apiInfo = ["api_error" => $e->getMessage()];
@@ -237,9 +235,9 @@ foreach ($attributeSetIds as $setId) {
             $merged['attribute_group_name'] = $groupName;
             $groupResult[] = $merged;
         }
-        // 排序：依照 attribute_code 升冪排列
+        // 初步排序依照來源 position（可選）
         usort($groupResult, function($a, $b) {
-            return strcmp($a['attribute_code'], $b['attribute_code']);
+            return $a['position'] - $b['position'];
         });
         $finalResult[$setId][$groupId] = [
             'group_name' => $groupName,
@@ -281,7 +279,7 @@ function callMagento2Api($endpoint, $method, $data, $magento2Domain, $restEndpoi
 }
 
 // ----------------------------
-// 正式執行：批次遷移
+// 正式執行：批次遷移及指派 attribute
 // ----------------------------
 foreach ($finalResult as $sourceSetId => $groups) {
     $targetSetId = $attributeSetMapping[$sourceSetId] ?? "未知";
@@ -358,8 +356,15 @@ foreach ($finalResult as $sourceSetId => $groups) {
             echo "建立 group {$groupName} 成功，Magento2 group id：{$targetGroupId}<br>";
         }
         
-        // 處理該 group 下的每個 attribute
-        foreach ($groupData['attributes'] as $attribute) {
+        // 先將 group 下所有 attribute 依 attribute_code 升冪排序（從 1 開始）
+        $attributesSorted = $groupData['attributes'];
+        usort($attributesSorted, function($a, $b) {
+            return strcmp($a['attribute_code'], $b['attribute_code']);
+        });
+        
+        // 依排序順序依序建立並指派 attribute
+        $sortOrder = 1;
+        foreach ($attributesSorted as $attribute) {
             $frontendInput = (isset($attribute['frontend_input']) && !empty($attribute['frontend_input'])) ? $attribute['frontend_input'] : "text";
             if (strtolower($attribute['attribute_code']) === "weight") {
                 $frontendInput = "text";
@@ -423,11 +428,9 @@ foreach ($finalResult as $sourceSetId => $groups) {
                     $targetAttrId = $getResponse['attribute_id'];
                     echo "找到 attribute {$attributeCode}，Magento2 attribute id：{$targetAttrId}<br>";
                     if (isset($getResponse['is_visible']) && !$getResponse['is_visible']) {
-                        // 使用 GET 回傳的完整屬性物件進行更新
                         $existingAttribute = $getResponse;
                         $existingAttribute['is_visible'] = true;
                         $existingAttribute['default_frontend_label'] = $defaultFrontendLabel;
-                        // 移除 attribute_code 避免衝突
                         unset($existingAttribute['attribute_code']);
                         $updatePayload = ["attribute" => $existingAttribute];
                         echo "<pre>Attribute Update Payload: " . print_r($updatePayload, true) . "</pre>";
@@ -451,11 +454,12 @@ foreach ($finalResult as $sourceSetId => $groups) {
             }
             echo "建立 attribute " . htmlspecialchars($attribute['attribute_code']) . " 成功，Magento2 attribute id：{$targetAttrId}<br>";
             
+            // 指派 attribute 到 group，排序後以新的 sortOrder
             $assignPayload = [
                 "attributeSetId" => (int)$targetSetId,
                 "attributeGroupId" => (int)$targetGroupId,
-                "attributeCode" => isset($attribute['attribute_code']) ? $attribute['attribute_code'] : "",
-                "sortOrder" => isset($attribute['position']) ? (int)$attribute['position'] : 10
+                "attributeCode" => $attribute['attribute_code'] ?? "",
+                "sortOrder" => $sortOrder
             ];
             echo "<pre>Attribute Assignment Request Payload: " . print_r($assignPayload, true) . "</pre>";
             $assignResponse = callMagento2Api("/products/attribute-sets/attributes", "POST", $assignPayload, $magento2Domain, $restEndpoint, $magento2Token);
@@ -467,6 +471,7 @@ foreach ($finalResult as $sourceSetId => $groups) {
             } else {
                 echo "指派 attribute " . htmlspecialchars($attribute['attribute_code']) . " 到 group {$groupName} 失敗。<br>";
             }
+            $sortOrder++; // 依序增加 sortOrder
         }
         echo "<hr>";
     }
