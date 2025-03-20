@@ -20,6 +20,7 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 $m1Domain  = rtrim($config['magento_domain'], '/') . '/';
 $m1ApiUser = $config['api_user'];
 $m1ApiKey  = $config['api_key'];
+$m2ApiKey  = $config['api_key2'];
 $m1WsdlUrl = $m1Domain . 'api/soap/?wsdl';
 
 // ----------------- Magento 2 設定 -----------------
@@ -50,7 +51,7 @@ function getMagento2AdminToken($m2Domain, $restEndpoint, $username, $password) {
     }
     return $token;
 }
-$m2AdminToken = getMagento2AdminToken($m2Domain, $restEndpoint, $m1ApiUser, $m1ApiKey);
+$m2AdminToken = getMagento2AdminToken($m2Domain, $restEndpoint, $m1ApiUser, $m2ApiKey);
 echo "<h3>Magento 2 Admin Token:</h3><pre>" . htmlspecialchars($m2AdminToken) . "</pre>";
 
 // ----------------- 連線 Magento 1 SOAP -----------------

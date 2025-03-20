@@ -2,7 +2,7 @@
 /**
  * 本程式做以下幾件事：
  * 1. 從 ../config.json 讀取 Magento 1 與 Magento 2 的設定。
- * 2. 連線到 Magento 1.9 資料庫，找出「自訂分類屬性」以及每個分類對應的屬性數值。
+ * 2. 連線到 Magento 1.9 資料庫，找出「分類屬性」以及每個分類對應的屬性數值。（不過濾 is_user_defined）
  * 3. 使用先前遷移時產生的 (m1_category_id => m2_category_id) 對照表，找到在 Magento 2 上的對應分類。
  * 4. 透過 Magento 2 REST API (PUT /V1/categories/:id)，將這些屬性寫回到對應的分類。
  * 5. 程式會印出每個請求的 Payload 與 Request URL，方便除錯。
@@ -33,6 +33,7 @@ $restEndpoint = $config['rest_endpoint']; // 例如 "/rest/all/V1"
 // Magento 1 & 2 API 帳密 (假設 2.4.7 的 admin 帳密也在同樣欄位)
 $apiUser = $config['api_user'];
 $apiKey  = $config['api_key'];
+$apiKey2  = $config['api_key2'];
 
 // -------------------------------------------------------------------------
 // 2. 建立 Magento 1 資料庫連線（PDO）
@@ -71,13 +72,13 @@ function getMagento2AdminToken($m2Domain, $restEndpoint, $username, $password) {
     }
     return $token;
 }
-$m2AdminToken = getMagento2AdminToken($m2Domain, $restEndpoint, $apiUser, $apiKey);
+$m2AdminToken = getMagento2AdminToken($m2Domain, $restEndpoint, $apiUser, $apiKey2);
 echo "<h3>Magento 2 Admin Token:</h3><pre>" . htmlspecialchars($m2AdminToken) . "</pre>";
 
 // -------------------------------------------------------------------------
-// 4. 取得 Magento 1.9 的「自訂分類屬性」清單
+// 4. 取得 Magento 1.9 的「分類屬性」清單
 //    - 在 eav_attribute / eav_entity_type 找出屬於 catalog_category 的屬性
-//    - 過濾系統內建屬性 (is_user_defined = 1)，可依需求調整
+//    - 取消過濾系統內建屬性 (is_user_defined)
 // -------------------------------------------------------------------------
 $sqlAttributes = "
     SELECT
@@ -89,16 +90,15 @@ $sqlAttributes = "
     INNER JOIN eav_entity_type AS eet ON ea.entity_type_id = eet.entity_type_id
     WHERE
         eet.entity_type_code = 'catalog_category'
-        AND ea.is_user_defined = 1
 ";
 $stmtAttr = $pdoM1->query($sqlAttributes);
 $customAttrList = $stmtAttr->fetchAll(PDO::FETCH_ASSOC);
 
 if (empty($customAttrList)) {
-    die("在 Magento 1 找不到任何自訂分類屬性 (is_user_defined=1)");
+    die("在 Magento 1 找不到任何分類屬性");
 }
 
-echo "<h3>Magento 1 自訂分類屬性清單</h3>";
+echo "<h3>Magento 1 分類屬性清單</h3>";
 echo "<pre>";
 print_r($customAttrList);
 echo "</pre>";
@@ -119,7 +119,7 @@ $backendTableMap = [
 // 以 category_id 為索引，暫存每個分類的「attribute_code => value」
 $categoryCustomValues = [];
 
-// 根據查到的每個自訂屬性，逐一去對應的 backend table 撈資料
+// 根據查到的每個屬性，逐一去對應的 backend table 撈資料
 foreach ($customAttrList as $attr) {
     $attrId   = $attr['attribute_id'];
     $attrCode = $attr['attribute_code'];
@@ -131,7 +131,7 @@ foreach ($customAttrList as $attr) {
     }
     $tableName = $backendTableMap[$backend];
 
-    // 只取 store_id = 0 (預設層級) 的數值，若需多商店可自行擴充
+    // 只取 store_id = 0 (預設層級) 的數值
     $sqlValue = "
         SELECT entity_id AS category_id, value
         FROM {$tableName}
@@ -157,52 +157,55 @@ foreach ($customAttrList as $attr) {
 // -------------------------------------------------------------------------
 $migrationMap = [
     // key: Magento 1 category_id, value: Magento 2 category_id
-    80  => 10,  // MioWORK™
-    34  => 11,  // Handhelds
-    146 => 12,  // A500s Series
-    35  => 13,  // Fleet Tablets
-    88  => 14,  // F740s
-    59  => 15,  // Industrial Tablets
-    86  => 16,  // L1000 Series
-    60  => 17,  // Legacy
-    70  => 18,  // F700 Series
-    69  => 19,  // A500 Series
-    72  => 20,  // L130 Series
-    71  => 21,  // L100 Series
-    73  => 22,  // A200/A300 Series
-    74  => 23,  // L70 Series
-    76  => 24,  // Latest Products
-    77  => 25,  // MiDM™
-    103 => 26,  // Cradle
-    81  => 27,  // MioCARE™
-    61  => 28,  // Handhelds
-    62  => 29,  // Tablets
-    63  => 30,  // Legacy
-    68  => 31,  // A300 Series
-    66  => 32,  // L130 Series
-    64  => 33,  // A200 Series
-    65  => 34,  // MiCor
-    67  => 35,  // A500 Series
-    78  => 36,  // Latest Products
-    141 => 37,  // MioEYE™
-    143 => 38,  // Fleet Cameras
-    149 => 39,  // MioServ™
-    150 => 40,  // Smart Kiosks
-    153 => 41,  // Mobile POS
-    154 => 42,  // POS Box PCs
-    152 => 43,  // Latest Products
+    80  => 8,  // MioWORK™
+    34  => 9,  // Handhelds
+    146 => 10,  // A500s Series
+    35  => 11,  // Fleet Tablets
+    88  => 12,  // F740s
+    59  => 13,  // Industrial Tablets
+    86  => 14,  // L1000 Series
+    60  => 15,  // Legacy
+    70  => 16,  // F700 Series
+    69  => 17,  // A500 Series
+    72  => 18,  // L130 Series
+    71  => 19,  // L100 Series
+    73  => 20,  // A200/A300 Series
+    74  => 21,  // L70 Series
+    76  => 22,  // Latest Products
+    77  => 23,  // MiDM™
+    103 => 24,  // Cradle
+    81  => 25,  // MioCARE™
+    61  => 26,  // Handhelds
+    62  => 27,  // Tablets
+    63  => 28,  // Legacy
+    68  => 29,  // A300 Series
+    66  => 30,  // L130 Series
+    64  => 31,  // A200 Series
+    65  => 32,  // MiCor
+    67  => 33,  // A500 Series
+    78  => 34,  // Latest Products
+    141 => 35,  // MioEYE™
+    143 => 36,  // Fleet Cameras
+    149 => 37,  // MioServ™
+    150 => 38,  // Smart Kiosks
+    153 => 39,  // Mobile POS
+    154 => 40,  // POS Box PCs
+    152 => 41,  // Latest Products
 ];
 
 // -------------------------------------------------------------------------
-// 7. 定義更新 Magento 2 分類自訂屬性的函式 (PUT)
+// 7. 定義更新 Magento 2 分類屬性的函式 (PUT)
 // -------------------------------------------------------------------------
 function updateMagento2CategoryCustomAttributes($m2CategoryId, $customAttrAssoc, $m2Domain, $restEndpoint, $adminToken) {
     if (empty($customAttrAssoc)) {
         return;
     }
-    // 組合要更新的 custom_attributes
+    // 組合要更新的 custom_attributes，不包含 available_sort_by 與 default_sort_by 屬性
     $customAttrsArray = [];
     foreach ($customAttrAssoc as $attrCode => $val) {
+        if ($attrCode === 'available_sort_by' || $attrCode === 'default_sort_by') {
+            continue;
+        }
         $customAttrsArray[] = [
             "attribute_code" => $attrCode,
             "value"          => $val
@@ -250,7 +253,7 @@ function updateMagento2CategoryCustomAttributes($m2CategoryId, $customAttrAssoc,
 // 8. 逐一比對 Magento 1 的分類 ID → 找到其對應的 Magento 2 ID
 //    再將自訂屬性更新到 Magento 2
 // -------------------------------------------------------------------------
-echo "<h2>開始將 Magento 1 的自訂分類屬性同步到 Magento 2</h2>";
+echo "<h2>開始將 Magento 1 的分類屬性同步到 Magento 2</h2>";
 
 foreach ($categoryCustomValues as $m1CatId => $attrData) {
     // 判斷是否在對照表中
@@ -262,7 +265,6 @@ foreach ($categoryCustomValues as $m1CatId => $attrData) {
     $m2CatId = $migrationMap[$m1CatId];
 
     // $attrData 形如 [ 'some_custom_code' => 'value', ... ]
-    // 這些屬性若尚未在 M2 建立，可能需要先建立後再更新
     echo "<p>→ 更新自訂屬性：M1 Category ID = {$m1CatId} → M2 Category ID = {$m2CatId}</p>";
 
     updateMagento2CategoryCustomAttributes($m2CatId, $attrData, $m2Domain, $restEndpoint, $m2AdminToken);
