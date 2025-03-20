@@ -15,62 +15,55 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 }
 
 // -------------------------------------------------------------------------
-// 2. Magento 1.9 SOAP API 參數設定與連線
+// 2. Magento 1.9 資料庫連線設定 (使用 PDO 連線)
 // -------------------------------------------------------------------------
-$magentoDomain = rtrim($config['magento_domain'], '/') . '/';
-$apiUser       = $config['api_user'];
-$apiKey        = $config['api_key'];
-$apiKey2       = $config['api_key2'];
-$soapUrl       = $magentoDomain . 'api/soap/?wsdl';
-
+$dbHost     = $config['db_host'] ?? '';
+$dbName     = $config['db_name'] ?? '';
+$dbUser     = $config['db_user'] ?? '';
+$dbPassword = $config['db_password'] ?? '';
+if (empty($dbHost) || empty($dbName) || empty($dbUser)) {
+    die("Magento1 資料庫連線設定不完整");
+}
 try {
-    $client = new SoapClient($soapUrl);
-    $session = $client->login($apiUser, $apiKey);
-} catch (Exception $e) {
-    die("Magento 1 SOAP 連線或登入失敗，錯誤訊息: " . $e->getMessage());
+    $pdo = new PDO("mysql:host={$dbHost};dbname={$dbName};charset=utf8", $dbUser, $dbPassword);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Magento1 資料庫連線失敗：" . $e->getMessage());
 }
 
 // -------------------------------------------------------------------------
-// 3. 取得 Magento 1 之 attribute set (ID: 22 與 23) 屬性列表
-//    使用 product_attribute.list 方法 (SOAP V1)
+// 3. 取得 Magento 1.9 的 attribute set (ID: 22 與 23) 屬性列表 (從資料庫撈取)
 // -------------------------------------------------------------------------
 $m1AttributeSetIds = [22, 23];
 $m1Results = [];
 $totalM1Count = 0;
 
 foreach ($m1AttributeSetIds as $setId) {
-    try {
-        // 使用 product_attribute.list 取得屬性清單
-        $result = $client->call($session, 'product_attribute.list', array($setId));
-        $attributes = array();
-        if (is_array($result)) {
-            foreach ($result as $attr) {
-                // 根據文件，屬性代碼存放在 code 欄位
-                if (isset($attr['code'])) {
-                    $attributes[] = $attr['code'];
-                } else {
-                    $attributes[] = isset($attr['attribute_id']) ? $attr['attribute_id'] : '';
-                }
+    // 透過 eav_entity_attribute 連結 eav_attribute 撈取該屬性集下所有屬性
+    $stmt = $pdo->prepare("SELECT ea.attribute_id, ea.attribute_code FROM eav_attribute ea INNER JOIN eav_entity_attribute eea ON eea.attribute_id = ea.attribute_id WHERE eea.attribute_set_id = :setId");
+    $stmt->execute([':setId' => $setId]);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $attributes = [];
+    if (is_array($rows)) {
+        foreach ($rows as $row) {
+            // 若 attribute_code 有值則取 code，否則以 attribute_id 代替
+            if (!empty($row['attribute_code'])) {
+                $attributes[] = $row['attribute_code'];
+            } else {
+                $attributes[] = $row['attribute_id'];
             }
         }
-        // 移除重複項目
-        $attributes = array_unique($attributes);
-        // 自然排序
-        sort($attributes, SORT_NATURAL | SORT_FLAG_CASE);
-        $count = count($attributes);
-        $m1Results[$setId] = [
-            'attributes' => $attributes,
-            'count'      => $count,
-            'raw_info'   => $result
-        ];
-        $totalM1Count += $count;
-    } catch (Exception $e) {
-        $m1Results[$setId] = [
-            'attributes' => [],
-            'count'      => 0,
-            'error'      => $e->getMessage()
-        ];
     }
+    // 移除重複並自然排序
+    $attributes = array_unique($attributes);
+    sort($attributes, SORT_NATURAL | SORT_FLAG_CASE);
+    $count = count($attributes);
+    $m1Results[$setId] = [
+        'attributes' => $attributes,
+        'count'      => $count,
+        'raw_info'   => $rows
+    ];
+    $totalM1Count += $count;
 }
 
 // -------------------------------------------------------------------------
@@ -101,10 +94,10 @@ function getMagento2AdminToken($m2Domain, $restEndpoint, $username, $password) {
     }
     return $token;
 }
-$m2AdminToken = getMagento2AdminToken($m2Domain, $restEndpoint, $apiUser, $apiKey2);
+$m2AdminToken = getMagento2AdminToken($m2Domain, $restEndpoint, $config['api_user'], $config['api_key2']);
 
 // -------------------------------------------------------------------------
-// 5. 取得 Magento 2 之 attribute set (ID: 9 與 10) 屬性列表（REST API）
+// 5. 取得 Magento 2 的 attribute set (ID: 9 與 10) 屬性列表（透過 REST API）
 // -------------------------------------------------------------------------
 $m2AttributeSetIds = [9, 10];
 $m2Results = [];
@@ -133,7 +126,7 @@ foreach ($m2AttributeSetIds as $setId) {
     if (!is_array($data)) {
         $data = [];
     }
-    $attributes = array();
+    $attributes = [];
     foreach ($data as $attr) {
         if (isset($attr['attribute_code'])) {
             $attributes[] = $attr['attribute_code'];
@@ -152,8 +145,8 @@ foreach ($m2AttributeSetIds as $setId) {
 }
 
 // -------------------------------------------------------------------------
-// 6. 比較：將 M1 22 對應 M2 10，M1 23 對應 M2 9
-//    計算哪些屬性在 M1 有但 M2 沒有，以及哪些在 M2 有但 M1 沒有，並自然排序
+// 6. 比較：將 Magento1 的 Attribute Set ID 22 對應 Magento2 的 ID 10，Attribute Set ID 23 對應 Magento2 的 ID 9
+//    分別計算 M1 有但 M2 沒有的屬性、以及 M2 有但 M1 沒有的屬性，並進行自然排序
 // -------------------------------------------------------------------------
 $mapping = [
     22 => 10,
@@ -164,10 +157,10 @@ $comparisonResults = [];
 foreach ($mapping as $m1SetId => $m2SetId) {
     $m1List = isset($m1Results[$m1SetId]['attributes']) ? $m1Results[$m1SetId]['attributes'] : [];
     $m2List = isset($m2Results[$m2SetId]['attributes']) ? $m2Results[$m2SetId]['attributes'] : [];
-    // 差集：在 M1 但不在 M2 的屬性
+    // 差集：在 M1 有但 M2 沒有
     $diffM1 = array_diff($m1List, $m2List);
     sort($diffM1, SORT_NATURAL | SORT_FLAG_CASE);
-    // 差集：在 M2 但不在 M1 的屬性
+    // 差集：在 M2 有但 M1 沒有
     $diffM2 = array_diff($m2List, $m1List);
     sort($diffM2, SORT_NATURAL | SORT_FLAG_CASE);
     
@@ -196,7 +189,7 @@ foreach ($mapping as $m1SetId => $m2SetId) {
     </style>
 </head>
 <body>
-    <h2>Magento 1.9 SOAP API (Attribute Set ID: 22 與 23)</h2>
+    <h2>Magento 1.9 DB (Attribute Set ID: 22 與 23)</h2>
     <table>
         <tr>
             <th>Attribute Set ID</th>
