@@ -47,6 +47,7 @@ if (!$configData) {
 $magentoDomain = trim($configData['magento_domain'] ?? '');
 $apiUser       = trim($configData['api_user'] ?? '');
 $apiKey        = trim($configData['api_key'] ?? '');
+$apiKey2       = trim($configData['api_key2'] ?? '');
 if (empty($magentoDomain) || empty($apiUser) || empty($apiKey)) {
     die("Magento1 API 設定不完整");
 }
@@ -105,7 +106,7 @@ function getMagento2Token($domain, $endpoint, $username, $password) {
     }
     return $token;
 }
-$magento2Token = getMagento2Token($magento2Domain, $restEndpoint, $apiUser, $apiKey);
+$magento2Token = getMagento2Token($magento2Domain, $restEndpoint, $apiUser, $apiKey2);
 
 // ----------------------------
 // Mapping 設定：來源 attribute set 與目標 attribute set
@@ -144,6 +145,7 @@ $groupSql = "SELECT * FROM eav_attribute_group WHERE attribute_set_id = :setId O
 
 // ----------------------------
 // SQL：取得 attribute 基本資料（來源）
+// 加入 INNER JOIN 時抓取 eea.sort_order 欄位
 // ----------------------------
 $attrSql = "
 SELECT 
@@ -162,6 +164,7 @@ SELECT
     ea.is_user_defined,
     cea.is_visible_on_front AS is_visible,
     cea.position,
+    eea.sort_order,
     ea.source_model,
     ea.frontend_label
 FROM eav_attribute AS ea
@@ -356,14 +359,12 @@ foreach ($finalResult as $sourceSetId => $groups) {
             echo "建立 group {$groupName} 成功，Magento2 group id：{$targetGroupId}<br>";
         }
         
-        // 先將 group 下所有 attribute 依 attribute_code 升冪排序（從 1 開始）
+        // 將 group 下所有 attribute 依 attribute_code 升冪排序（不再使用自增 sortOrder，而是採用從資料中抓取的 sort_order 值）
         $attributesSorted = $groupData['attributes'];
         usort($attributesSorted, function($a, $b) {
             return strcmp($a['attribute_code'], $b['attribute_code']);
         });
         
-        // 依排序順序依序建立並指派 attribute
-        $sortOrder = 1;
         foreach ($attributesSorted as $attribute) {
             $frontendInput = (isset($attribute['frontend_input']) && !empty($attribute['frontend_input'])) ? $attribute['frontend_input'] : "text";
             if (strtolower($attribute['attribute_code']) === "weight") {
@@ -454,12 +455,12 @@ foreach ($finalResult as $sourceSetId => $groups) {
             }
             echo "建立 attribute " . htmlspecialchars($attribute['attribute_code']) . " 成功，Magento2 attribute id：{$targetAttrId}<br>";
             
-            // 指派 attribute 到 group，排序後以新的 sortOrder
+            // 指派 attribute 到 group，將從資料中取得的 sort_order 帶入 sortOrder 欄位
             $assignPayload = [
                 "attributeSetId" => (int)$targetSetId,
                 "attributeGroupId" => (int)$targetGroupId,
                 "attributeCode" => $attribute['attribute_code'] ?? "",
-                "sortOrder" => $sortOrder
+                "sortOrder" => isset($attribute['sort_order']) ? (int)$attribute['sort_order'] : 0
             ];
             echo "<pre>Attribute Assignment Request Payload: " . print_r($assignPayload, true) . "</pre>";
             $assignResponse = callMagento2Api("/products/attribute-sets/attributes", "POST", $assignPayload, $magento2Domain, $restEndpoint, $magento2Token);
@@ -471,7 +472,6 @@ foreach ($finalResult as $sourceSetId => $groups) {
             } else {
                 echo "指派 attribute " . htmlspecialchars($attribute['attribute_code']) . " 到 group {$groupName} 失敗。<br>";
             }
-            $sortOrder++; // 依序增加 sortOrder
         }
         echo "<hr>";
     }

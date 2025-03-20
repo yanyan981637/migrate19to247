@@ -50,7 +50,7 @@ if (empty($dbHost) || empty($dbName) || empty($dbUser)) {
 $magento2Domain = rtrim(trim($configData['magento2_domain'] ?? ''), '/');
 $restEndpoint   = trim($configData['rest_endpoint'] ?? ''); // 應為 /rest/all/V1
 $apiUser2       = trim($configData['api_user'] ?? ''); // 使用同一組 api_user 與 api_key
-$apiKey2        = trim($configData['api_key'] ?? '');
+$apiKey2        = trim($configData['api_key2'] ?? '');
 if (empty($magento2Domain) || empty($restEndpoint) || empty($apiUser2) || empty($apiKey2)) {
     die("Magento2 REST API 設定不完整");
 }
