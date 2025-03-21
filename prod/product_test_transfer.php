@@ -20,40 +20,41 @@ error_reporting(E_ALL);
 
 // 對應表：key 為 Magento 1 的 category_id，value 為 Magento 2 的 category_id
 $migrationMap = [
-    80  => 10,  // MioWORK™
-    34  => 11,  // Handhelds
-    146 => 12,  // A500s Series
-    35  => 13,  // Fleet Tablets
-    88  => 14,  // F740s
-    59  => 15,  // Industrial Tablets
-    86  => 16,  // L1000 Series
-    60  => 17,  // Legacy
-    70  => 18,  // F700 Series
-    69  => 19,  // A500 Series
-    72  => 20,  // L130 Series
-    71  => 21,  // L100 Series
-    73  => 22,  // A200/A300 Series
-    74  => 23,  // L70 Series
-    76  => 24,  // Latest Products
-    77  => 25,  // MiDM™
-    103 => 26,  // Cradle
-    81  => 27,  // MioCARE™
-    61  => 28,  // Handhelds
-    62  => 29,  // Tablets
-    63  => 30,  // Legacy
-    68  => 31,  // A300 Series
-    66  => 32,  // L130 Series
-    64  => 33,  // A200 Series
-    65  => 34,  // MiCor
-    67  => 35,  // A500 Series
-    78  => 36,  // Latest Products
-    141 => 37,  // MioEYE™
-    143 => 38,  // Fleet Cameras
-    149 => 39,  // MioServ™
-    150 => 40,  // Smart Kiosks
-    153 => 41,  // Mobile POS
-    154 => 42,  // POS Box PCs
-    152 => 43,  // Latest Products
+    // key: Magento 1 category_id, value: Magento 2 category_id
+    80  => 8,  // MioWORK™
+    34  => 9,  // Handhelds
+    146 => 10,  // A500s Series
+    35  => 11,  // Fleet Tablets
+    88  => 12,  // F740s
+    59  => 13,  // Industrial Tablets
+    86  => 14,  // L1000 Series
+    60  => 15,  // Legacy
+    70  => 16,  // F700 Series
+    69  => 17,  // A500 Series
+    72  => 18,  // L130 Series
+    71  => 19,  // L100 Series
+    73  => 20,  // A200/A300 Series
+    74  => 21,  // L70 Series
+    76  => 22,  // Latest Products
+    77  => 23,  // MiDM™
+    103 => 24,  // Cradle
+    81  => 25,  // MioCARE™
+    61  => 26,  // Handhelds
+    62  => 27,  // Tablets
+    63  => 28,  // Legacy
+    68  => 29,  // A300 Series
+    66  => 30,  // L130 Series
+    64  => 31,  // A200 Series
+    65  => 32,  // MiCor
+    67  => 33,  // A500 Series
+    78  => 34,  // Latest Products
+    141 => 35,  // MioEYE™
+    143 => 36,  // Fleet Cameras
+    149 => 37,  // MioServ™
+    150 => 38,  // Smart Kiosks
+    153 => 39,  // Mobile POS
+    154 => 40,  // POS Box PCs
+    152 => 41,  // Latest Products
 ];
 
 // 設定 Magento 1.9 媒體根目錄（請根據您的環境調整）

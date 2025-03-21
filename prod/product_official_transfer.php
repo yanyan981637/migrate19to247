@@ -30,13 +30,41 @@ $imageErrors = [];
 
 // migration mapping
 $migrationMap = [
-    80  => 10,  34  => 11,  146 => 12,  35  => 13,  88  => 14,
-    59  => 15,  86  => 16,  60  => 17,  70  => 18,  69  => 19,
-    72  => 20,  71  => 21,  73  => 22,  74  => 23,  76  => 24,
-    77  => 25,  103 => 26,  81  => 27,  61  => 28,  62  => 29,
-    63  => 30,  68  => 31,  66  => 32,  64  => 33,  65  => 34,
-    67  => 35,  78  => 36,  141 => 37,  143 => 38,  149 => 39,
-    150 => 40,  153 => 41,  154 => 42,  152 => 43,
+    // key: Magento 1 category_id, value: Magento 2 category_id
+    80  => 8,  // MioWORK™
+    34  => 9,  // Handhelds
+    146 => 10,  // A500s Series
+    35  => 11,  // Fleet Tablets
+    88  => 12,  // F740s
+    59  => 13,  // Industrial Tablets
+    86  => 14,  // L1000 Series
+    60  => 15,  // Legacy
+    70  => 16,  // F700 Series
+    69  => 17,  // A500 Series
+    72  => 18,  // L130 Series
+    71  => 19,  // L100 Series
+    73  => 20,  // A200/A300 Series
+    74  => 21,  // L70 Series
+    76  => 22,  // Latest Products
+    77  => 23,  // MiDM™
+    103 => 24,  // Cradle
+    81  => 25,  // MioCARE™
+    61  => 26,  // Handhelds
+    62  => 27,  // Tablets
+    63  => 28,  // Legacy
+    68  => 29,  // A300 Series
+    66  => 30,  // L130 Series
+    64  => 31,  // A200 Series
+    65  => 32,  // MiCor
+    67  => 33,  // A500 Series
+    78  => 34,  // Latest Products
+    141 => 35,  // MioEYE™
+    143 => 36,  // Fleet Cameras
+    149 => 37,  // MioServ™
+    150 => 38,  // Smart Kiosks
+    153 => 39,  // Mobile POS
+    154 => 40,  // POS Box PCs
+    152 => 41,  // Latest Products
 ];
 
 $attributeSetMap = [
@@ -258,6 +286,7 @@ foreach ($products as $prod) {
     if ($mediaRows) {
         foreach ($mediaRows as $row) {
             $entryPayload = getMediaEntryPayload($row, $magentoDomain);
+            // $entryPayload = null;
             if ($entryPayload !== null) {
                 $mediaGalleryEntries[] = $entryPayload;
             }
@@ -517,7 +546,7 @@ if (isset($_POST['post_to_m2'])) {
     <?php foreach ($finalProducts as $entityId => $payloadData): ?>
     <div class="productBox">
         <h2>產品 ID: <?php echo htmlspecialchars((string)$entityId); ?> / SKU: <?php echo htmlspecialchars((string)$payloadData['sku']); ?></h2>
-        <!-- <div class="tableTitle">Magento 1.9 原始欄位資訊</div>
+        <div class="tableTitle">Magento 1.9 原始欄位資訊</div>
         <table>
             <tbody>
                 <?php
@@ -546,7 +575,7 @@ if (isset($_POST['post_to_m2'])) {
                 ?>
             </tbody>
         </table>
-        <?php endif; ?> -->
+        <?php endif; ?>
     </div>
     <?php endforeach; ?>
     
